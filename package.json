@@ -1,0 +1,29 @@
+{
+  "name": "meat-api",
+  "version": "1.0.0",
+  "description": "P.O.C Typscript Rest API - Restaurantes",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafalogan/meat-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafalogan/meat-api/issues"
+  },
+  "homepage": "https://github.com/rafalogan/meat-api#readme",
+  "dependencies": {
+    "restify": "^8.4.0"
+  },
+  "devDependencies": {
+    "@types/restify": "^7.2.12",
+    "nodemon": "^1.19.1",
+    "typescript": "^3.5.3"
+  }
+}
