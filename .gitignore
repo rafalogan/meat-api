@@ -8,7 +8,10 @@
 #modules
 \node_modules
 
-# Files 
+# Files
 .env
 thumbs.db
 desktop.ini
+
+# Diretories
+\dist
