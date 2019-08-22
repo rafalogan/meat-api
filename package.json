@@ -2,9 +2,10 @@
   "name": "meat-api",
   "version": "1.0.0",
   "description": "P.O.C Typscript Rest API - Restaurantes",
-  "main": "index.js",
+  "main": "main.ts",
   "scripts": {
-    "start": "nodemon dist/main.js",
+    "start": "nodemon ./dist/main.js",
+    "build": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
