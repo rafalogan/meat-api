@@ -11,6 +11,19 @@ class UsersRouter extends Router {
                 return next()
             })
         });
+
+        application.get('/users/:id', (req, res, next) => {
+            const id  = parseInt(req.params.id);
+
+            User.findById(id).then(user => {
+                if (user) {
+                    res.json(user);
+                    next()
+                } else  {
+                    res.send(400);
+                }
+            })
+        })
     }
 }
 
