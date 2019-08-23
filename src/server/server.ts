@@ -7,11 +7,11 @@ import {Router} from "../common/router";
 export class Server {
     application: restify.Server;
 
-    bootstrap(routes: Router[] = []): Promise<Server> {
+    bootstrap(routes: Router[] = []) : Promise<Server> {
         return this.initializeDb().then(() => this.initRoutes(routes).then(() => this));
     }
 
-    initRoutes(routes: Router[]): Promise<any> {
+    initRoutes(routes: Router[]) : Promise<any> {
         return new Promise((resolve, reject) => {
             try {
                 this.application = restify.createServer({
@@ -20,6 +20,7 @@ export class Server {
                 });
 
                 this.application.use(restify.plugins.queryParser());
+                this.application.use(restify.plugins.bodyParser());
 
                 // routes
                 for (let router of routes ) router.applyRoutes(this.application);
@@ -31,7 +32,7 @@ export class Server {
         });
     }
 
-    initializeDb() {
+    initializeDb() : Promise<mongoose.Mongoose> {
         return mongoose.connect(environment.db.url, {
             useCreateIndex: true,
             useNewUrlParser: true
