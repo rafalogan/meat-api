@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "5d603927a43a0bc873bde4f3",
+    "name": "Peter",
+    "email": "peter@marvel.com",
+    "password": "tia-may"
+  },
+  {
+    "_id": "5d603a66a43a0bc873bde560",
+    "name": "Aloy",
+    "email": "aloy@horizonzero.com",
+    "password": "rost"
+  },
+  {
+    "_id": "5d603b04a43a0bc873bde5a3",
+    "name": "Root",
+    "email": "root@root.com",
+    "password": "root"
+  },
+  {
+    "_id": "5d603b4ca43a0bc873bde5ce",
+    "name": "Lara Croft",
+    "email": "lara@tombraider.com",
+    "password": "croft"
+  },
+  {
+    "_id": "5d603b9ba43a0bc873bde5ff",
+    "name": "Tony Stark",
+    "email": "stark@marvel.com",
+    "password": "morgan"
+  },
+  {
+    "_id": "5d603beba43a0bc873bde632",
+    "name": "Jill Valentine",
+    "email": "jill@capicon.com",
+    "password": "nemesis"
+  }
+]

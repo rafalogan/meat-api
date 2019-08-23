@@ -33,6 +33,7 @@ export class Server {
 
     initializeDb() {
         return mongoose.connect(environment.db.url, {
+            useCreateIndex: true,
             useNewUrlParser: true
         });
     }
