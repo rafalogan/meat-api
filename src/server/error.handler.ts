@@ -13,6 +13,11 @@ export const handleError = (req: restfiy.Request, res: restfiy.Response, err, do
         break;
         case 'ValidationError':
             err.statusCode = 400;
+            const messages: any[] = [];
+            for (let name in err.errors) messages.push({message: err.errors[name].message});
+            err.toJSON = () => ({
+                errors: messages
+            });
         break
     }
 
