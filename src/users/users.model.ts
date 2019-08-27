@@ -37,16 +37,16 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', function (next){
     const user: User = this;
-    if (user.isModified('password')) {
+    if(!user.isModified('password')){
         next()
-    } else {
+    }else{
         bcrypt.hash(user.password, environment.security.saltRounds)
-            .then(hash => {
+            .then(hash=>{
                 user.password = hash;
                 next()
-            }).catch(next);
+            }).catch(next)
     }
 });
 
