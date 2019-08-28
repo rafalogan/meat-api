@@ -1,65 +1,25 @@
 import * as restfy from 'restify'
 import {NotFoundError} from "restify-errors";
 
-import {Router} from "../common/router";
+import {ModelRouter} from "../common/model-router";
 import {User} from "./users.model";
 
-
-class UsersRouter extends Router {
+class UsersRouter extends ModelRouter<User> {
     constructor() {
-        super();
+        super(User);
         this.on('beforeRender',
                 document => document.password = undefined)
     }
 
     applyRoutes(application: restfy.Server) {
-        application.get('/users', (req, res, next) => {
-            User.find()
-                .then(this.render(res, next))
-                .catch(next)
-        });
 
-        application.get('/users/:id', (req, res, next) => {
-            User.findById(req.params.id)
-                .then(this.render(res, next))
-                .catch(next)
-        });
+        application.get('/users', this.findAll);
+        application.get('/users/:id', [this.validateId, this.findById]);
+        application.post('/users', this.save);
+        application.put('/users/:id', [this.validateId, this.replace]);
+        application.patch('/users/:id', [this.validateId, this.update]);
+        application.del('/users/:id', [this.validateId, this.delete]);
 
-        application.post('/users', (req, res, next) => {
-            let user = new User(req.body);
-            user.save().then(this.render(res, next))
-                .catch(next)
-        });
-
-        application.put('/users/:id', (req, res, next) => {
-            const options = { runValidators: true, overwrite: true };
-            User.update({_id: req.params.id}, req.body, options).exec()
-                .then(result => {
-                    if (result.n) return User.findById(req.params.id);
-                    new NotFoundError('Documento não encontrado!')
-                }).then(this.render(res, next))
-                .catch(next)
-        });
-
-        application.patch('/users/:id', (req, res, next) => {
-            const options = { runValidators: true, new: true };
-
-            User.findByIdAndUpdate(req.params.id, req.body, options)
-                .then(this.render(res, next))
-                .catch(next)
-        });
-
-        application.del('/users/:id', (req, res, next) => {
-            User.remove({_id: req.params.id}).exec()
-                .then(result => {
-                    if (result.n) {
-                        res.send(204)
-                    } else {
-                        new NotFoundError('Documento não encontrado!')
-                    }
-                    return next()
-                }).catch(next)
-        })
     }
 }
 export const usersRouter = new UsersRouter();

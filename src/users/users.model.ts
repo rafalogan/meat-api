@@ -4,6 +4,15 @@ import * as bcrypt from 'bcrypt';
 import {validateCPF} from "../common/validators";
 import {environment} from "../common/environment";
 
+const cpf = {
+    type: String,
+    required: false,
+    validate: {
+        validator: validateCPF,
+        message: '{PATH}: Invalid CPF ({VALUE})'
+    }
+};
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,14 +36,7 @@ const userSchema = new mongoose.Schema({
         required: false,
         enum: ['Male', 'Female']
     },
-    cpf: {
-        type: String,
-        required: false,
-        validate: {
-            validator: validateCPF,
-            message: '{PATH}: Invalid CPF ({VALUE})'
-        }
-    }
+    cpf
 });
 
 const hashPassword = (object, next) => {
