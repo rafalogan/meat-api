@@ -1,5 +1,4 @@
 import * as restfy from 'restify'
-import {NotFoundError} from "restify-errors";
 
 import {ModelRouter} from "../common/model-router";
 import {User} from "./users.model";
