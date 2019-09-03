@@ -17,7 +17,7 @@ const reviewSchema = new mongoose.Schema({
         required: true
     },
     rating: {
-        typw: Number,
+        type: Number,
         required: true
     },
     comments: {
@@ -37,4 +37,4 @@ const reviewSchema = new mongoose.Schema({
     }
 });
 
-const Review = mongoose.model<Review>('Review', reviewSchema);
+export const Review = mongoose.model<Review>('Review', reviewSchema);
