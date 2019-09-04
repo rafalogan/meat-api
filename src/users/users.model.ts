@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 import {validateCPF} from "../common/validators";
 import {environment} from "../common/environment";
+import {Model} from "mongoose";
 
 const cpf = {
     type: String,
@@ -38,6 +39,10 @@ const userSchema = new mongoose.Schema({
     },
     cpf
 });
+
+userSchema.statics.findByEmail = function (email: string) {
+  return this.findOne({ email })
+};
 
 const hashPassword = (object, next) => {
     bcrypt.hash(object.password, environment.security.saltRounds)
@@ -75,4 +80,8 @@ export interface User extends mongoose.Document {
     password: string
 }
 
-export const User = mongoose.model<User>('User', userSchema);
+export interface UserModel extends mongoose.Model<User> {
+    findByEmail (email: string): Promise<User>
+}
+
+export const User = mongoose.model<User, UserModel>('User', userSchema);
