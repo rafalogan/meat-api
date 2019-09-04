@@ -13,6 +13,11 @@ export class Server {
         return this.initializeDb().then(() => this.initRoutes(routes).then(() => this));
     }
 
+    shutdown() {
+        return mongoose.disconnect()
+            .then(() => this.application.close())
+    }
+
     initRoutes(routes: Router[]) : Promise<any> {
         return new Promise((resolve, reject) => {
             try {
