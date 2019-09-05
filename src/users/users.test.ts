@@ -1,26 +1,7 @@
 import 'jest';
 import * as request from 'supertest';
 
-import {Server} from "../server/server";
-import {environment} from "../common/environment";
-import {usersRouter} from "./users.router";
-import {User} from "./users.model";
-
-let localUrl: string;
-let server: Server;
-
-beforeAll( () => {
-    environment.db.url = process.env.DB_URL || 'mongodb://root:root@localhost/meat-api-test-db?authSource=admin';
-    environment.server.port = process.env.SERVER_PORT || 3004;
-
-    localUrl = `http://localhost:${environment.server.port}`;
-
-    server = new Server();
-    return  server.bootstrap([usersRouter])
-        .then(server => console.log('Server is listening on:', server.application.address()))
-        .then(() => User.remove({}).exec())
-        .catch(console.error)
-});
+let localUrl: string = (<any>global).testUrl;
 
 test('get /users', () => {
    return request(localUrl)
@@ -78,5 +59,3 @@ test('patch /users/:id', () => {
             })
         ).catch(fail);
 });
-
-afterAll(() => server.shutdown());
