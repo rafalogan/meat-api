@@ -6,6 +6,8 @@ import {usersRouter} from "./src/users/users.router";
 import {User} from "./src/users/users.model";
 import {reviewsRouter} from "./src/reviews/reviews.router";
 import {Review} from "./src/reviews/reviews.model";
+import {restaurantsRouter} from "./src/restaurants/restaurants.router";
+import {Restaurant} from "./src/restaurants/restaurants.model";
 
 let localUrl: string;
 let server: Server;
@@ -19,10 +21,12 @@ const beforeAllTests = () => {
     server = new Server();
     return  server.bootstrap([
         usersRouter,
-        reviewsRouter
+        reviewsRouter,
+        restaurantsRouter
     ]).then(server => console.log('Server is listening on:', server.application.address()))
         .then(() => User.remove({}).exec())
         .then(() => Review.remove({}).exec())
+        .then(() => Restaurant.remove({}).exec())
 };
 
 const afterAllTests = () => server.shutdown();

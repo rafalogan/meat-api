@@ -16,6 +16,7 @@ export const handleError = (req: restfiy.Request, res: restfiy.Response, err, do
             const messages: any[] = [];
             for (let name in err.errors) messages.push({message: err.errors[name].message});
             err.toJSON = () => ({
+                message: 'Validation error while processing your request',
                 errors: messages
             });
         break
