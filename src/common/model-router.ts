@@ -58,7 +58,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
         const pageSize = this.pageSize;
         const url = req.url;
 
-        this.model.count({}).exec()
+        this.model.countDocuments({}).exec()
             .then(count => this.model.find().skip(skip)
             .limit(this.pageSize)
             .then(this.renderAll(res, next, {
