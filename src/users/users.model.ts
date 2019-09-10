@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema({
         required: false,
         enum: ['Male', 'Female']
     },
-    cpf
+    cpf,
+    profiles: {
+        type: [String],
+        required: false
+    }
 });
 
 userSchema.statics.findByEmail = function (email: string, projection: string) {
@@ -46,6 +50,10 @@ userSchema.statics.findByEmail = function (email: string, projection: string) {
 
 userSchema.methods.matches = function (password: string): boolean {
     return bcrypt.compareSync(password, this.password);
+};
+
+userSchema.methods.hasAny = function (...profiles: string[]): boolean {
+    return profiles.some(profile => this.profiles.indexOf(profile) !== -1)
 };
 
 const hashPassword = (object, next) => {
@@ -74,7 +82,7 @@ const updateMiddleware = function (next){
 };
 
 userSchema.pre('save', saveMiddleware);
-userSchema.pre('findOneAndUpdate', updateMiddleware);
+userSchema.pre('useFindAndModify', updateMiddleware);
 userSchema.pre('update', updateMiddleware);
 
 
@@ -82,7 +90,11 @@ export interface User extends mongoose.Document {
     name: string,
     email: string,
     password: string,
-    matches(password: string): boolean
+    cpf: string,
+    gender: string,
+    profiles: string[],
+    matches(password: string): boolean,
+    hasAny(...profiles: string[]): boolean
 }
 
 export interface UserModel extends mongoose.Model<User> {
