@@ -4,8 +4,8 @@
   "description": "P.O.C Typscript Rest API - Restaurantes",
   "main": "main.ts",
   "scripts": {
-    "start": "nodemon ./dist/main.js",
-    "build": "tsc -w",
+    "start": "nodemon main.ts",
+    "build": "tsc",
     "test": "ts-node jest.startup.ts"
   },
   "repository": {
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/rafalogan/meat-api.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "RafaDraw www.rafadraw@gmail.com",
   "license": "MIT",
   "jest": {
     "globals": {
@@ -44,9 +44,11 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "nodemon": "^1.19.1",
+    "sucrase": "^3.10.1",
     "supertest": "^4.0.2",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
+    "tslint": "^5.20.0",
     "typescript": "^3.6.2"
   }
 }
