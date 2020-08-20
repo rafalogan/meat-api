@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rafalogan/meat-api#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "mongoose": "^5.6.10",
     "restify": "^8.4.0",
     "restify-errors": "^8.0.1"
